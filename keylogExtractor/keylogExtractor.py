@@ -114,4 +114,4 @@ for computerID in emailData.keys():
     for timeDataPair in emailData[computerID]:
         result = result + f'%%%{str(timeDataPair[0])}%%%\n{timeDataPair[1]}\n'
 
-    open(workingDirectory + computerID + ".txt", 'a').write(str(result))
+    open(workingDirectory + computerID + ".txt", 'w').write(str(result))
