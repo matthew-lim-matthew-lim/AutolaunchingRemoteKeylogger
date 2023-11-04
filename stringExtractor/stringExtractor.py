@@ -13,11 +13,15 @@ from datetime import datetime
 
 print(os.getcwd())
 
+# Get the substrings in a string
+
 
 def get_substrings(input_string, min_length=int(sys.argv[2])):
     substrings = [input_string[i:j] for i in range(
         len(input_string)) for j in range(i + min_length, len(input_string) + 1)]
     return substrings
+
+# Get the most common substrings
 
 
 def most_common_substrings(input_string, num_common_substrings):
@@ -26,13 +30,14 @@ def most_common_substrings(input_string, num_common_substrings):
     return common_substrings
 
 
+# Open source file and store as a string
 sourceFile = open(sys.argv[1], "r")
 input_string = sourceFile.read()
 
+# Remove keywords
 while '"\'"' in input_string:
     input_string = input_string.replace('"\'"', '')
 
-# Remove keywords
 takeInput = False
 keyWordSkip = False
 extracted_string = ''
@@ -56,10 +61,11 @@ for character in input_string:
 while '\"' in extracted_string:
     extracted_string = extracted_string.replace('\"', '')
 
-# You can change this number to get the desired number of common substrings
+# 3rd argument is the number of common substring results to display
 num_common = int(sys.argv[3])
 common_substrings = most_common_substrings(extracted_string, num_common)
 
+# Display the common substrings from most common to least common
 for substring, count in common_substrings:
     print(f"'{substring}': {count} times")
 
@@ -68,6 +74,7 @@ current_datetime = datetime.now()
 formatted_datetime = current_datetime.strftime(
     "%d-%m-%Y %H %M %S")
 
+# Prepare the sourceFile name as a directory for saving the extracted keylog file
 os.makedirs("Extracted Strings", exist_ok=True)
 
 argFile = sys.argv[1][:-4]
@@ -81,5 +88,6 @@ while ' ' in argFile:
 while '.' in argFile:
     argFile = argFile.replace('.', '')
 
+# Save the extracted keylogs (without keywords or keycharacters) in a file
 with open("Extracted Strings\\" + argFile + ".txt", 'a+') as file:
     file.write(str(extracted_string))

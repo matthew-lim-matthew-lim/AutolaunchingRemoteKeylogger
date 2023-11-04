@@ -59,16 +59,12 @@ for msg in msgs[::-1]:
             messageData = []
 
             for part in my_msg.walk():
-                # print(part.get_content_type())
                 if part.get_content_type() == 'text/plain':
                     messageData = [dateTime, part.get_payload()]
             if (computerID not in emailData.keys()):
                 emailData[computerID] = []
 
             emailData[computerID].append(messageData)
-
-
-# print(emailData)
 
 # Concatenated Extraction (without individual timestamps)
 
@@ -102,7 +98,7 @@ formatted_datetime = current_datetime.strftime(
 
 workingDirectory = f'{formatted_datetime}\\'
 
-# Create a folder for your extraction
+# Create a folder for datetime extractions
 os.mkdir(formatted_datetime)
 
 for computerID in emailData.keys():

